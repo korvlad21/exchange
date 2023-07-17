@@ -44,14 +44,7 @@ RUN chown -R www-data:www-data storage
 # Сгенерируйте ключ приложения Laravel
 RUN php artisan key:generate
 
-RUN sleep 10
-# ... предыдущие инструкции Dockerfile ...
 
-# Добавьте скрипт для проверки готовности базы данных MySQL
-COPY wait-for.sh /wait-for.sh
-RUN chmod +x /wait-for.sh
-
-CMD /wait-for.sh db:3306 --timeout=60 -- php artisan migrate:refresh
 
 # Установите правильные разрешения на директории после миграции
 RUN chown -R www-data:www-data storage
